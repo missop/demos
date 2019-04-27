@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 保存数据，有后进next指向 */
+        function Node(element) {
+            this.element = element;
+            this.next = null;
+        }
+        /* 链表操作方法，首先定义头节点，find找到插入节点的位置，insert插入方法，display删除 */
+        function LList() {
+            this.head = new Node('head');
+            this.find = find;
+            this.insert = insert;
+            this.display = display;
+            this.findPrevious = findPrevious;
+            this.remove = remove;
+        }
+        function find(item) {
+            var currentNode = this.head;
+            while (currentNode.element != item) {
+                currentNode = currentNode.next;
+            }
+            return currentNode;
+        }
+        /* item是指在哪个元素后面插入 */
+        function insert(newElement, item) {
+            var newNode = new Node(newElement);
+            var currentNode = this.find(item);
+            newNode.next = currentNode.next;
+            currentNode.next = newNode;
+        }
+        function display() {
+            var currentNode = this.head;
+            while (currentNode.next != null) {
+                console.log(currentNode.next.element);
+                currentNode = currentNode.next;
+            }
+        }
+        function findPrevious(item) {
+            var currentNode = this.head;
+            while (currentNode.next != null && currentNode.next.element != item) {
+                currentNode = currentNode.next;
+            }
+            return currentNode;
+        }
+        function remove(item) {
+            var preNode = this.findPrevious(item);
+            var curNode = this.find(item);
+            if (preNode.next != null) {
+                preNode.next = curNode.next;
+                curNode.next = null;
+            }
+        }
+        var cities = new LList();
+        cities.insert('first', 'head');
+        cities.insert('second', 'first');
+        cities.insert('third', 'second');
+        cities.display();
+        console.log('==============');
+        cities.remove('second');
+        cities.display();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Dictionary() {
+            this.datastore = new Array();
+            this.add = add;
+            this.find = find;
+            this.remove = remove;
+            this.showAll = showAll;
+            this.count = count;
+            this.clear = clear;
+        }
+        function add(key, value) {
+            this.datastore[key] = value;
+        }
+        function find(key) {
+            return this.datastore[key];
+        }
+        function remove(key) {
+            delete this.datastore[key];
+        }
+        function showAll() {
+            var dataKeys = Object.keys(this.datastore);
+            for (const key in dataKeys) {
+                console.log(dataKeys[key] + '------>' + this.datastore[dataKeys[key]]);
+
+            }
+        }
+        function count() {
+            return Object.keys(this.datastore).length;
+        }
+        function clear() {
+            var dataKeys = Object.keys(this.datastore);
+            for (const key in dataKeys) {
+                delete this.datastore[dataKeys[key]];
+            }
+        }
+        var pbook = new Dictionary();
+        pbook.add('Addinds', 498);
+        pbook.add('Nike', 500);
+        console.log(pbook.find('Addinds'));
+
+    </script>
+</body>
+
+</html>

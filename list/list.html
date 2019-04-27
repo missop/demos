@@ -1,0 +1,38 @@
+<head>
+    <title>队列</title>
+</head>
+<script>
+    function Queue() {
+        this.dataStore = [];
+        this.enqueue = enqueue;
+        this.dequeue = dequeue;
+        this.front = front;
+        this.back = back;
+        this.empty = empty;
+        this.toString = toString;
+    }
+    function enqueue(ele) {
+        this.dataStore.push(ele);
+    }
+    function dequeue() {
+        this.dataStore.shift();
+    }
+    function front() {
+        return this.dataStore[0];
+    }
+    function back() {
+        return this.dataStore[this.dataStore.length - 1];
+    }
+    function empty() {
+        this.dataStore = [];
+    }
+    function toString() {
+
+    }
+    var q=new Queue();
+    q.enqueue("😀");
+    q.enqueue("xs");
+    q.enqueue("sd");
+    console.log(q.front());
+    
+</script>

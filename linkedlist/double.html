@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 保存数据，有后进next指向 */
+        function Node(element) {
+            this.element = element;
+            this.next = null;
+            this.previous = null;
+        }
+        /* 链表操作方法，首先定义头节点，find找到插入节点的位置，insert插入方法，display删除 */
+        function LList() {
+            this.head = new Node('head');
+            this.find = find;
+            this.insert = insert;
+            this.display = display;
+            this.remove = remove;
+            this.findLast = findLast;
+            this.displayReverse = displayReverse;
+        }
+        function find(item) {
+            var currentNode = this.head;
+            while (currentNode.element != item) {
+                currentNode = currentNode.next;
+            }
+            return currentNode;
+        }
+        /* item是指在哪个元素后面插入 */
+        function insert(newElement, item) {
+            var newNode = new Node(newElement);
+            var currentNode = this.find(item);
+            /* 如果是尾节点 */
+            newNode.next = currentNode.next;
+            newNode.previous = currentNode;
+            currentNode.next = newNode;
+            /* 如果不是尾节点 */
+            if (newNode.next != null) {
+                newNode.next.previous = newNode;
+            }
+        }
+        function display() {
+            var currentNode = this.head;
+            while (currentNode.next != null) {
+                console.log(currentNode.next.element);
+                currentNode = currentNode.next;
+            }
+        }
+        function remove(item) {
+            var curNode = this.find(item);
+            if (curNode.next != null) {
+                curNode.previous.next = curNode.next;
+                curNode.next.previous = curNode.previous;
+            } else {
+                curNode.previous.next = null;
+                curNode.previous = null;
+            }
+        }
+        function findLast() {
+            var currentNode = this.head;
+            while (currentNode.next != null) {
+                currentNode = currentNode.next;
+            }
+            return currentNode;
+        }
+        function displayReverse() {
+            var currentNode = this.findLast();
+            while (!(currentNode.previous == null)) {
+
+                console.log(currentNode.element);
+
+                currentNode = currentNode.previous;
+            }
+        }
+        var cities = new LList();
+        cities.insert('first', 'head');
+        cities.insert('second', 'first');
+        cities.insert('third', 'second');
+        cities.display();
+        console.log('==============');
+        cities.remove('second');
+        cities.display();
+        cities.displayReverse();
+    </script>
+</body>
+
+</html>
